@@ -32,6 +32,7 @@ def point_info():
     myLabel_intro = Label(root, text = f"(User: name )\n Points = {points}")
     myLabel_intro.place(x=250, y=0)
 
+
 def clean_up_down():
     global x, y, print_status
 
