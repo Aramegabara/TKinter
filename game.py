@@ -4,7 +4,7 @@ import random
 
 root=Tk()
 
-root.geometry("600x680")
+root.geometry("700x780")
 
 root["bg"]=("grey")
 
