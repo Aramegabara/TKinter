@@ -121,8 +121,6 @@ def go():
         bd.place(x=260, y=620)
         if oval_x != 0 and oval_y != 0: 
             can.create_oval(oval_x,oval_y,oval_x+30,oval_y+30, fill="blue", outline="red", width=4)
-    print(f'{x},{y},  == {oval_x}, {oval_y}')
-
 
 bs= Button(root, text="start", width=8, height=4, bg="green", command=go)
 bs.place(x=250, y=250)
