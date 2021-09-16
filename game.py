@@ -1,10 +1,11 @@
 from tkinter import *
-import random
+import random, time
 
 
 root=Tk()
-
-root.geometry("760x780")
+max_x = 760
+max_y = 780
+root.geometry(f"{max_x}x{max_y}")
 
 root["bg"]=("grey")
 
@@ -16,6 +17,9 @@ oval_x, oval_y = 0, 0
 ready=False
 print_status=True
 points = 0
+# move_status = True
+
+# ACTION MOVE
 
 def clean_oval():
     can.create_oval(oval_x,oval_y,oval_x+30,oval_y+30, fill="red", outline="blue", width=4)
@@ -64,39 +68,39 @@ def paint():
         oval_y = yr
         oval_x = xr
 
-
-def right():
-    global x, y, print_status
-    x=x+10
+def create_rectangle_action():
     can.create_rectangle(-5,-5, 505, 505, fill="#F0FFF0")
     can.create_rectangle(x, y, x+30, y+30, outline="#FF4500", width=5)
+
+# MOVE
+def right():
+    global x, y, print_status, max_x, move_status
+    x+=10
+    create_rectangle_action()
     try_create_oval()
     clean_left_right()
 
 
 def left():
     global x, y, print_status
-    x=x-10
-    can.create_rectangle(-5,-5, 505, 505, fill="#F0FFF0")
-    can.create_rectangle(x, y, x+30, y+30, outline="#FF4500", width=5)
+    x-=10
+    create_rectangle_action()
     try_create_oval()
     clean_left_right()
 
 
 def up():
     global x, y, print_status
-    y=y-10
-    can.create_rectangle(-5,-5, 505, 505, fill="#F0FFF0")
-    can.create_rectangle(x, y, x+30, y+30, outline="#FF4500", width=5)
+    y-=10
+    create_rectangle_action()
     try_create_oval()
     clean_up_down()
 
 
 def down():
     global x, y, print_status
-    y=y+10
-    can.create_rectangle(-5,-5, 505, 505, fill="#F0FFF0")
-    can.create_rectangle(x, y, x+30, y+30, outline="#FF4500",width=5)
+    y+=10
+    create_rectangle_action()
     try_create_oval()
     clean_up_down()
 
@@ -106,8 +110,7 @@ def go():
     paint()
     if ready == True:
         bs.place(x=-100,y=-100)
-        can.create_rectangle(-5,-5, 505, 505, fill="#F0FFF0")
-        can.create_rectangle(x, y, x+30, y+30, outline="#FF4500", width=5)
+        create_rectangle_action()
 
         bu=Button(root, text = "↑", width=3, height=2,bg="#FA8072", command=up)
         bd=Button(root, text = "↓", width=3, height=2,bg="#FA8072", command=down)
@@ -120,8 +123,8 @@ def go():
 
         bu.place(x=260, y=520)
         bd.place(x=260, y=620)
-        if oval_x != 0 and oval_y != 0: 
-            can.create_oval(oval_x,oval_y,oval_x+30,oval_y+30, fill="blue", outline="red", width=4)
+        if oval_x != 0 and oval_y != 0:
+            try_create_oval() 
 
 bs= Button(root, text="start", width=8, height=4, bg="green", command=go)
 bs.place(x=250, y=250)
